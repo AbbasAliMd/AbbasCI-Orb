@@ -16,4 +16,4 @@ steps:
         GET_TO: << parameters.to >>
       command: |
         echo "value of get_to $GET_TO"
-        echo "Checking parameters passing as Bash Env"
+        echo "Checking Bash Env"
