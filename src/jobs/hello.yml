@@ -11,6 +11,7 @@ parameters:
     description: "Hello to whom?"
 steps:
   - run:
+      name: hello job step to check param as env
       environment:
         GET_TO: << parameters.to >>
       command: |
