@@ -3,4 +3,4 @@
 # https://circleci.com/docs/orbs-best-practices/#accepting-parameters-as-strings-or-environment-variables
 #TO=$(circleci env subst "${PARAM_TO}")
 # If for any reason the TO variable is not set, default to "World"
-echo (("${PARAM_NUMA}" + "${PARAM_NUMB}"))
+echo $(("${PARAM_NUMA}" + "${PARAM_NUMB}"))
