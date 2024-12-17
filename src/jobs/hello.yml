@@ -10,5 +10,9 @@ parameters:
     default: "World"
     description: "Hello to whom?"
 steps:
-  - greet:
-      to: << parameters.to >>
+  - run:
+      environment:
+        GET_TO: << parameters.to >>
+      command: |
+        echo "value of get_to $GET_TO"
+        echo "Checking parameters passing as Bash Env"
