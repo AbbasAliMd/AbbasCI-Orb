@@ -38,7 +38,7 @@ steps:
       command: echo ${MY_ENV_VAR}
   - run:
       name: "Print an env var stored in the Project"
-      command: echo ${PROJECT_ENV_VAR}
+      command: echo "value of Project_var ${PROJECT_ENV_VAR}"
   - run:
       name: "Print an env var stored in a Context"
-      command: echo ${CONTEXT_ENV_VAR}
+      command: echo "Value of Context_var ${CONTEXT_ENV_VAR}"
