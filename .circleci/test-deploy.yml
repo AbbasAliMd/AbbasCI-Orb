@@ -40,6 +40,7 @@ workflows:
           filters: *filters
       - abbasci-orb/hello:
           to: AbbasAli
+          context: GlobEnv
           filters: *filters
       # The orb must be re-packed for publishing, and saved to the workspace.
       - orb-tools/pack:

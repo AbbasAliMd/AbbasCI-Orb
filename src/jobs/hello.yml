@@ -46,5 +46,4 @@ steps:
   - run:
       name: "Print an env var stored in a Context"
       command: |
-        echo "Conxt_var ${CONTEXT_ENV_VAR}"
         echo "Conxt_aws ${<< parameters.aws_role >>}"
