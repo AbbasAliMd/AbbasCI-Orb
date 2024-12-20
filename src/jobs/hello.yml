@@ -9,6 +9,10 @@ parameters:
     type: string
     default: "World"
     description: "Hello to whom?"
+  aws_role:
+    default: AWS_CC_ROLE
+    description: AWS account Role ARN
+    type: env_var_name
 steps:
   - run:
       name: hello job step to check param as env
@@ -41,4 +45,6 @@ steps:
       command: echo "value of Project_var ${PROJECT_ENV_VAR}"
   - run:
       name: "Print an env var stored in a Context"
-      command: echo "Value of Context_var ${CONTEXT_ENV_VAR}"
+      command: |
+        echo "Conxt_var ${CONTEXT_ENV_VAR}"
+        echo "Conxt_aws ${<< parameters.aws_role >>}"
