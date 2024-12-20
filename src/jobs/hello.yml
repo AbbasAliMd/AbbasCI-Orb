@@ -9,7 +9,7 @@ parameters:
     type: string
     default: "World"
     description: "Hello to whom?"
-  aws_role2:
+  aws_role3:
     default: AWS_CC_ROLE
     description: AWS account Role ARN
     type: env_var_name
@@ -46,4 +46,4 @@ steps:
   - run:
       name: "Print an env var stored in a Context"
       command: |
-        echo "Conxt_aws ${<< parameters.aws_role2 >>}"
+        echo "Conxt_aws ${<< parameters.aws_role3 >>}"
