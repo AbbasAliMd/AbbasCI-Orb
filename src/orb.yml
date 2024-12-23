@@ -1,0 +1,98 @@
+# This code is licensed from CircleCI to the user under the MIT license.
+# See here for details: https://circleci.com/developer/orbs/licensing
+version: 2.1
+description: |
+    This is a test Orb, initially it includes a calculator job to add 2 integers.
+display:
+    home_url: https://github.com/AbbasAliMd/AbbasCI-Orb
+    source_url: https://github.com/AbbasAliMd/AbbasCI-Orb
+commands:
+    add:
+        description: |
+            Add two numbers provided as integer parameters.
+        parameters:
+            numA:
+                description: Enter first number
+                type: integer
+            numB:
+                description: Enter second number
+                type: integer
+        steps:
+            - run:
+                command: |
+                    #!/bin/bash
+                    # This example uses envsubst to support variable substitution in the string parameter type.
+                    # https://circleci.com/docs/orbs-best-practices/#accepting-parameters-as-strings-or-environment-variables
+                    #TO=$(circleci env subst "${PARAM_TO}")
+                    # If for any reason the TO variable is not set, default to "World"
+                    echo $(("${PARAM_NUMA}" + "${PARAM_NUMB}"))
+                environment:
+                    PARAM_NUMA: <<parameters.numA>>
+                    PARAM_NUMB: <<parameters.numB>>
+                name: Adding <<parameters.numA>> + <<parameters.numB>>
+executors:
+    default:
+        description: |
+            This is a sample executor using Docker and Node. If you want to provide a custom environment in your orb, insert your image here. If you do not require an executor, you can simply delete this directory.
+        docker:
+            - image: cimg/node:<<parameters.tag>>
+        parameters:
+            tag:
+                default: lts
+                description: |
+                    Pick a specific cimg/node image variant: https://hub.docker.com/r/cimg/node/tags
+                type: string
+jobs:
+    hello:
+        description: |
+            Sample description
+        executor: default
+        parameters:
+            to:
+                default: World
+                description: Hello to whom?
+                type: string
+        steps:
+            - run:
+                command: |
+                    echo "value of get_to $GET_TO"
+                    echo "Checking Bash Env"
+                environment:
+                    GET_TO: << parameters.to >>
+                name: hello job step to check param as env
+            - run:
+                command: echo 'export MY_ENV_VAR="Mac"' >> "$BASH_ENV"
+                name: Setup custom environment variables
+            - run:
+                command: echo ${CIRCLE_BRANCH}
+                name: What branch am I on?
+            - run:
+                command: echo $CIRCLE_BRANCH
+                name: What branch am I on now?
+            - run:
+                command: |
+                    echo $CIRCLE_SHA1
+                    echo $CIRCLE_USERNAME
+                name: Print Builtin Vars
+            - run:
+                command: echo ${MY_ENV_VAR}
+                name: What was my custom environment variable?
+            - run:
+                command: echo "value of Project_var ${PROJECT_ENV_VAR}"
+                name: Print an env var stored in the Project
+            - run:
+                command: echo "Value of Context_var ${CONTEXT_ENV_VAR}"
+                name: Print an env var stored in a Context
+examples:
+    example:
+        description: |
+            Sample example description.
+        usage:
+            version: "2.1"
+            orbs:
+                <orb-name>: <namespace>/<orb-name>@1.2.3
+            workflows:
+                use-my-orb:
+                    jobs:
+                        - <orb-name>/<job-name>
+
